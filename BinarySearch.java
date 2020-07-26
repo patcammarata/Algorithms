@@ -40,9 +40,9 @@ public class BinarySearch {
 				return mid;
 			}
 			if (list[mid] > target) {
-				return recursiveBinarySearch(list, min, max-1, target);
+				return recursiveBinarySearch(list, min, mid-1, target);
 			} else {
-				return recursiveBinarySearch(list, min+1, max, target);
+				return recursiveBinarySearch(list, mid+1, max, target);
 			}
 		}
 	}
