@@ -1,14 +1,14 @@
 // Only works on sorted lists
 // May need to use a Comparator interface to search a list of objects
 
-public class BinarySearch {
+public class BinarySearch<E extends Comparable<E>> {
 	
 	public static void main(String[] args) {
 		int[] intList = {2, 4, 6, 8, 10, 12};
 		System.out.println(binarySearch(intList, 8));
 		System.out.println(recursiveBinarySearch(intList, 0, intList.length, 12));
 		String[] strList = {"Alfa", "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot"};
-		System.out.println(stringBinarySearch(strList, "Alpha"));
+		System.out.println(genericBinarySearch((Object[]) strList, (Object) "Delta"));
 	}
 	
 	// Time complexity: O(logn)
@@ -67,4 +67,22 @@ public class BinarySearch {
 		return -1;
 	}
 	
+	// Time complexity: O(logn)
+	// Space complexity: O(1)
+	public static int genericBinarySearch(Object[] list, Object target) {
+		int min = 0;
+		int max = list.length-1;
+		while (min <= max) {
+			int mid = (min+max)/2;
+			int compare = ((Comparable) list[mid]).compareTo(target);
+			if (compare == 0) {
+				return mid;
+			} else if (compare > 0) {
+				max = mid - 1;
+			} else {
+				min = mid + 1;
+			}
+		}
+		return -1;
+	}
 }
